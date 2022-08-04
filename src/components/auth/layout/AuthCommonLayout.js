@@ -1,6 +1,6 @@
 const AuthCommonLayout = ({ children }) => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#34495e]">
+    <div className="min-h-screen flex items-center justify-center ">
       {children}
     </div>
   );
