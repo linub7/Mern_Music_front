@@ -10,6 +10,8 @@ import CustomSpinner from 'components/Common/CustomSpinner';
 import NotLoggedInRoutes from 'routes/NotLoggedInRoutes';
 import LoggedInRoutes from 'routes/LoggedInRoutes';
 import OnlyAdminRoutes from 'routes/OnlyAdminRoutes';
+import CreateEditPlaylist from 'pages/create-edit-playlist';
+import EditSinglePlaylist from 'pages/create-edit-playlist/[playlistName]';
 
 function App() {
   const [forceRenderPage, setForceRenderPage] = useState(false);
@@ -28,6 +30,16 @@ function App() {
         </Route>
         <Route element={<LoggedInRoutes />}>
           <Route path="/" element={<Home />} />
+          <Route
+            path="/create-edit-playlist/:playlistId"
+            element={
+              <EditSinglePlaylist setForceRenderPage={setForceRenderPage} />
+            }
+          />
+          <Route
+            path="/create-edit-playlist"
+            element={<CreateEditPlaylist />}
+          />
         </Route>
         <Route element={<OnlyAdminRoutes />}></Route>
         <Route path="*" element={<NotFound />} />

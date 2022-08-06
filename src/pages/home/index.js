@@ -1,7 +1,7 @@
 import { getSongsHandler } from 'api/song';
 import CommonLayout from 'components/Common/layout';
 import Player from 'components/player-components/Player';
-import Playlists from 'components/songs/Playlists';
+import Playlists from 'components/playlist/Playlists';
 import SongsList from 'components/songs/SongsList';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,8 +13,6 @@ const HomePage = () => {
   const { auth } = useSelector((state) => state.auth);
   const { songs, selectedMusic } = useSelector((state) => state.songs);
   const dispatch = useDispatch();
-
-  console.log(selectedMusic);
 
   useEffect(() => {
     handleGetAllSongs();
