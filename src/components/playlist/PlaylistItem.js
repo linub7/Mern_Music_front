@@ -1,4 +1,4 @@
-import PlayListItemAction from './PlayListItemAction';
+import EditAndDeleteActions from '../Common/EditAndDeleteActions';
 
 const PlaylistItem = ({
   handleSetSelectedPlaylist,
@@ -19,7 +19,7 @@ const PlaylistItem = ({
         {playlist?.songs?.length} Songs
       </h1>
       {playlist?.name !== 'All Songs' && (
-        <PlayListItemAction
+        <EditAndDeleteActions
           handleClickDeleteIcon={handleClickDeleteIcon}
           handleClickEditIcon={handleClickEditIcon}
         />

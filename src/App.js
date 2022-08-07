@@ -12,6 +12,9 @@ import LoggedInRoutes from 'routes/LoggedInRoutes';
 import OnlyAdminRoutes from 'routes/OnlyAdminRoutes';
 import CreateEditPlaylist from 'pages/create-edit-playlist';
 import EditSinglePlaylist from 'pages/create-edit-playlist/[playlistName]';
+import AdminAllSongs from 'pages/admin/all-songs';
+import AdminAddSong from 'pages/admin/add-song';
+import AdminEditSingleSong from 'pages/admin/songs/edit/[songId]';
 
 function App() {
   const [forceRenderPage, setForceRenderPage] = useState(false);
@@ -29,7 +32,10 @@ function App() {
           <Route path="/auth/register" element={<Register />} />
         </Route>
         <Route element={<LoggedInRoutes />}>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={<Home forceRenderPage={forceRenderPage} />}
+          />
           <Route
             path="/create-edit-playlist/:playlistId"
             element={
@@ -41,7 +47,16 @@ function App() {
             element={<CreateEditPlaylist />}
           />
         </Route>
-        <Route element={<OnlyAdminRoutes />}></Route>
+        <Route element={<OnlyAdminRoutes />}>
+          <Route path="/admin/all-songs" element={<AdminAllSongs />} />
+          <Route path="/admin/add-song" element={<AdminAddSong />} />
+          <Route
+            path="/admin/songs/edit/:songId"
+            element={
+              <AdminEditSingleSong setForceRenderPage={setForceRenderPage} />
+            }
+          />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

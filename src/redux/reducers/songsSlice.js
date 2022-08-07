@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 export const songsSlice = createSlice({
   name: 'song',
   initialState: {
-    songs: [],
+    songs: localStorage.getItem('songs')
+      ? JSON.parse(localStorage.getItem('songs'))
+      : [],
     selectedMusic: {},
   },
   reducers: {

@@ -42,7 +42,6 @@ const LoginPage = () => {
       dispatch(hideLoading());
       return;
     }
-    console.log(data);
     toast.success('Successfully logged in');
     const { success, ...rest } = data;
     dispatch(hideLoading());

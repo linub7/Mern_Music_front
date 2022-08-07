@@ -1,6 +1,9 @@
 import { RiArrowLeftLine } from 'react-icons/ri';
 
-const CreateEditPlaylistPageHeader = ({ handleClickBackIcon, headerTitle }) => {
+const BackNavigateAndTitlePageHeader = ({
+  handleClickBackIcon,
+  headerTitle,
+}) => {
   return (
     <div className="flex items-center gap-2">
       <RiArrowLeftLine
@@ -12,4 +15,4 @@ const CreateEditPlaylistPageHeader = ({ handleClickBackIcon, headerTitle }) => {
   );
 };
 
-export default CreateEditPlaylistPageHeader;
+export default BackNavigateAndTitlePageHeader;

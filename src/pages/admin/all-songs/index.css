@@ -1,0 +1,17 @@
+thead {
+  background-color: rgba(128, 128, 128, 0.2);
+  padding: 10px !important;
+}
+
+th {
+  padding: 10px !important;
+  text-align: left;
+}
+
+td {
+  padding: 10px !important;
+}
+
+tr {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+}

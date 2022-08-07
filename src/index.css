@@ -66,3 +66,16 @@ input:focus {
   transition: background 450ms ease-in;
   -webkit-appearance: none;
 }
+
+.sc-bczRLJ.kiHXWb {
+  border: none;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #aeaeafa1;
+  border-radius: 5px;
+}

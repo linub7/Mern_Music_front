@@ -1,5 +1,5 @@
 import { deletePlaylistHandler } from 'api/song';
-import CustomButton from 'components/Common/CustomButton';
+import PageHeader from 'components/Common/PageHeader';
 import Cookies from 'js-cookie';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
@@ -66,13 +66,11 @@ const Playlists = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
-        <h1 className="text-slate-700 text-xl font-semibold">Your Playlists</h1>
-        <CustomButton
-          btnTitle={'Create Playlist'}
-          onClick={() => navigate('/create-edit-playlist')}
-        />
-      </div>
+      <PageHeader
+        header={'Your Playlists'}
+        onClick={() => navigate('/create-edit-playlist')}
+        btnTitle={'Create Playlist'}
+      />
       <div className="grid grid-cols-2 gap-3 mt-5">
         {allPlaylists?.map((playlist, index) => {
           const isSelected = playlist.name === selectedPlaylist?.name;

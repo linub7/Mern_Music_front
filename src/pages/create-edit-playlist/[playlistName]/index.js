@@ -1,6 +1,6 @@
 import { getSinglePlaylistHandler, updatePlaylistHandler } from 'api/song';
 import CommonLayout from 'components/Common/layout';
-import CreateEditPlaylistPageHeader from 'components/create-edit-playlist-components/CreateEditPlaylistPageHeader';
+import BackNavigateAndTitlePageHeader from 'components/Common/BackNavigateAndTitlePageHeader';
 import CreateEditPlaylistPageInputAndButton from 'components/create-edit-playlist-components/CreateEditPlaylistPageInputAndButton';
 import SongItem from 'components/songs/SongItem';
 import Cookies from 'js-cookie';
@@ -101,7 +101,7 @@ const EditSinglePlaylist = ({ setForceRenderPage }) => {
 
   return (
     <CommonLayout>
-      <CreateEditPlaylistPageHeader
+      <BackNavigateAndTitlePageHeader
         handleClickBackIcon={() => navigate('/')}
         headerTitle={'Edit Playlist'}
       />

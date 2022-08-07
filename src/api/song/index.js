@@ -1,10 +1,11 @@
 import client from 'api/client';
 
-export const addSongHandler = async (values, token) => {
+export const addSongHandler = async (formData, token) => {
   try {
-    const { data } = await client.post(`/songs`, values, {
+    const { data } = await client.post(`/songs`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
       },
     });
     return { data };
@@ -71,6 +72,21 @@ export const updatePlaylistHandler = async (playlistId, payload, token) => {
         },
       }
     );
+    return { data };
+  } catch (error) {
+    const { response } = error;
+    return { err: response?.data };
+  }
+};
+
+export const updateSongHandler = async (songId, formData, token) => {
+  try {
+    const { data } = await client.put(`/songs/${songId}`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     return { data };
   } catch (error) {
     const { response } = error;

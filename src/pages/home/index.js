@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { hideLoading, showLoading } from 'redux/reducers/alertSlice';
 import { setSongs } from 'redux/reducers/songsSlice';
 
-const HomePage = () => {
+const HomePage = ({ forceRenderPage }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const { auth } = useSelector((state) => state.auth);
   const { songs, selectedMusic } = useSelector((state) => state.songs);
@@ -16,7 +16,7 @@ const HomePage = () => {
 
   useEffect(() => {
     handleGetAllSongs();
-  }, [auth?.token]);
+  }, [auth?.token, forceRenderPage]);
 
   const handleGetAllSongs = async () => {
     dispatch(showLoading());
@@ -30,12 +30,13 @@ const HomePage = () => {
     }
 
     dispatch(hideLoading());
+    localStorage.setItem('songs', JSON.stringify(data?.songs));
     dispatch(setSongs(data?.songs));
   };
   return (
     <CommonLayout>
       <div className="flex p-2 gap-5">
-        <div className="w-1/2 flex flex-col">
+        <div className="w-1/2 flex flex-col overflow-x-hidden">
           <SongsList songs={songs} setIsPlaying={setIsPlaying} />
         </div>
         <div className="w-1/2">
@@ -48,7 +49,7 @@ const HomePage = () => {
           artist={selectedMusic?.artist}
           album={selectedMusic?.album}
           year={selectedMusic?.year}
-          audioSrc={selectedMusic?.src}
+          audioSrc={selectedMusic?.src?.url}
           isPlaying={isPlaying}
           setIsPlaying={setIsPlaying}
           selectedMusic={selectedMusic}
