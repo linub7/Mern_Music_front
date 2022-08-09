@@ -1,9 +1,17 @@
 import { useState } from 'react';
+import { RiShuffleLine } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedMusic } from 'redux/reducers/songsSlice';
 import PlayerAudioControls from './PlayerAudioControls';
 
-const PlayerAudio = ({ audioSrc, audioRef, setIsPlaying, isPlaying }) => {
+const PlayerAudio = ({
+  audioSrc,
+  audioRef,
+  setIsPlaying,
+  isPlaying,
+  setShuffleOn,
+  shuffleOn,
+}) => {
   const [currentTime, setCurrentTime] = useState(0);
   const { songs, selectedMusic } = useSelector((state) => state.songs);
   const dispatch = useDispatch();
@@ -12,28 +20,41 @@ const PlayerAudio = ({ audioSrc, audioRef, setIsPlaying, isPlaying }) => {
     audioRef.current.play();
     setIsPlaying(!isPlaying);
   };
+
   const handlePause = () => {
     audioRef.current.pause();
     setIsPlaying(false);
   };
 
   const handleNextSong = () => {
-    const index = songs.findIndex((song) => song._id === selectedMusic._id);
-    const nextSong = songs[index + 1];
-    if (nextSong) {
+    if (!shuffleOn) {
+      const index = songs.findIndex((song) => song._id === selectedMusic._id);
+      const nextSong = songs[index + 1];
+      if (nextSong) {
+        setIsPlaying(false);
+        dispatch(setSelectedMusic(nextSong));
+      }
+    } else {
+      const randomSong = songs[Math.floor(Math.random() * songs.length)];
       setIsPlaying(false);
-      dispatch(setSelectedMusic(nextSong));
+      dispatch(setSelectedMusic(randomSong));
     }
   };
 
   const handlePreviousSong = () => {
-    const index = songs.findIndex((song) => song._id === selectedMusic._id);
-    console.log(index);
-    const previousSong = songs[index - 1];
-    console.log(previousSong);
-    if (previousSong) {
+    if (!shuffleOn) {
+      const index = songs.findIndex((song) => song._id === selectedMusic._id);
+      console.log(index);
+      const previousSong = songs[index - 1];
+      console.log(previousSong);
+      if (previousSong) {
+        setIsPlaying(false);
+        dispatch(setSelectedMusic(previousSong));
+      }
+    } else {
+      const randomSong = songs[Math.floor(Math.random() * songs.length)];
       setIsPlaying(false);
-      dispatch(setSelectedMusic(previousSong));
+      dispatch(setSelectedMusic(randomSong));
     }
   };
   return (
@@ -52,6 +73,12 @@ const PlayerAudio = ({ audioSrc, audioRef, setIsPlaying, isPlaying }) => {
       ></audio>
 
       <div className="flex gap-3 items-center">
+        <RiShuffleLine
+          className={`cursor-pointer text-3xl hover:text-pink-400 transition-all ${
+            shuffleOn ? 'text-pink-600' : ''
+          }`}
+          onClick={() => setShuffleOn(!shuffleOn)}
+        />
         <h1>
           {Math.floor(currentTime / 60)}:{Math.floor(currentTime % 60)}
         </h1>

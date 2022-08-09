@@ -14,6 +14,7 @@ const Player = ({
 }) => {
   const audioRef = createRef();
   const [volume, setVolume] = useState(0.5);
+  const [shuffleOn, setShuffleOn] = useState(false);
 
   return (
     <div className="absolute bottom-0 left-0 p-5 shadow-lg w-full bg-gray-100 border">
@@ -25,6 +26,8 @@ const Player = ({
           year={year}
         />
         <PlayerAudio
+          shuffleOn={shuffleOn}
+          setShuffleOn={setShuffleOn}
           audioSrc={audioSrc}
           audioRef={audioRef}
           isPlaying={isPlaying}

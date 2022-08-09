@@ -7,6 +7,7 @@ export const songsSlice = createSlice({
       ? JSON.parse(localStorage.getItem('songs'))
       : [],
     selectedMusic: {},
+    tempAllSongs: [],
   },
   reducers: {
     setSongs: (state, action) => {
