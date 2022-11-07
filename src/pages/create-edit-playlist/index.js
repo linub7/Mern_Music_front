@@ -12,10 +12,13 @@ import { useNavigate } from 'react-router-dom';
 import { hideLoading, showLoading } from 'redux/reducers/alertSlice';
 import { setAuth } from 'redux/reducers/authSlice';
 import { setSelectedMusic } from 'redux/reducers/songsSlice';
+import CustomSpinner from 'components/Common/CustomSpinner';
 
 const CreateEditPlaylist = () => {
   const [name, setName] = useState('');
   const [selectedSongs, setSelectedSongs] = useState([]);
+
+  const { loading } = useSelector((state) => state.alerts);
 
   const { songs } = useSelector((state) => state.songs);
   const { auth } = useSelector((state) => state.auth);
@@ -66,6 +69,8 @@ const CreateEditPlaylist = () => {
       navigate('/');
     }, 1500);
   };
+
+  if (loading) return <CustomSpinner />;
 
   return (
     <CommonLayout>

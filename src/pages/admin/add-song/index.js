@@ -11,6 +11,7 @@ import { hideLoading, showLoading } from 'redux/reducers/alertSlice';
 import toast from 'react-hot-toast';
 import { setSongs } from 'redux/reducers/songsSlice';
 import AddSongForm from 'components/admin/AddSongForm';
+import CustomSpinner from 'components/Common/CustomSpinner';
 
 const fileTypes = ['MP3'];
 
@@ -28,6 +29,7 @@ const AdminAddSong = () => {
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => state.auth);
   const { songs } = useSelector((state) => state.songs);
+  const { loading } = useSelector((state) => state.alerts);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -70,6 +72,8 @@ const AdminAddSong = () => {
     dispatch(hideLoading());
     navigate('/admin/all-songs');
   };
+
+  if (loading) return <CustomSpinner />;
 
   return (
     <CommonLayout>

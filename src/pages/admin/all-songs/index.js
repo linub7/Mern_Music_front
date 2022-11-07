@@ -6,9 +6,11 @@ import './index.css';
 import { useNavigate } from 'react-router-dom';
 import PageHeader from 'components/Common/PageHeader';
 import AllSongsTable from 'components/admin/AllSongsTable';
+import CustomSpinner from 'components/Common/CustomSpinner';
 
 const AdminAllSongs = () => {
   const { songs } = useSelector((state) => state.songs);
+  const { loading } = useSelector((state) => state.alerts);
   const navigate = useNavigate();
 
   const handleClickDeleteIcon = (song) => {
@@ -17,6 +19,8 @@ const AdminAllSongs = () => {
   const handleClickEditIcon = (song) => {
     navigate(`/admin/songs/edit/${song._id}`, { state: { song } });
   };
+
+  if (loading) return <CustomSpinner />;
   return (
     <CommonLayout>
       <PageHeader

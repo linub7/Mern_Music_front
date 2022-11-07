@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { hideLoading, showLoading } from 'redux/reducers/alertSlice';
 import { setAuth } from 'redux/reducers/authSlice';
+import CustomSpinner from 'components/Common/CustomSpinner';
 
 const EditSinglePlaylist = ({ setForceRenderPage }) => {
   const [name, setName] = useState('');
@@ -20,6 +21,7 @@ const EditSinglePlaylist = ({ setForceRenderPage }) => {
   const navigate = useNavigate();
   const { songs } = useSelector((state) => state.songs);
   const { auth } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.alerts);
 
   console.log({ playlist });
   console.log({ selectedSongs });
@@ -98,6 +100,8 @@ const EditSinglePlaylist = ({ setForceRenderPage }) => {
     setForceRenderPage((prev) => !prev);
     navigate('/');
   };
+
+  if (loading) return <CustomSpinner />;
 
   return (
     <CommonLayout>

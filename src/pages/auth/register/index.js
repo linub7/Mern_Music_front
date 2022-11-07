@@ -1,9 +1,10 @@
 import { signupUser } from 'api/auth';
 import RegisterForm from 'components/auth/form/register/RegisterForm';
 import AuthCommonLayout from 'components/auth/layout/AuthCommonLayout';
+import CustomSpinner from 'components/Common/CustomSpinner';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { hideLoading, showLoading } from 'redux/reducers/alertSlice';
 
@@ -13,6 +14,8 @@ const RegisterPage = () => {
     email: '',
     password: '',
   });
+
+  const { loading } = useSelector((state) => state.alerts);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -52,6 +55,7 @@ const RegisterPage = () => {
     dispatch(hideLoading());
     navigate('/auth/login');
   };
+  if (loading) return <CustomSpinner />;
   return (
     <AuthCommonLayout>
       <RegisterForm

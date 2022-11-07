@@ -3,17 +3,19 @@ import LoginForm from 'components/auth/form/login/LoginForm';
 import AuthCommonLayout from 'components/auth/layout/AuthCommonLayout';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { hideLoading, showLoading } from 'redux/reducers/alertSlice';
 import Cookies from 'js-cookie';
 import { setAuth } from 'redux/reducers/authSlice';
+import CustomSpinner from 'components/Common/CustomSpinner';
 
 const LoginPage = () => {
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
+  const { loading } = useSelector((state) => state.alerts);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,6 +51,7 @@ const LoginPage = () => {
     dispatch(setAuth(rest));
     navigate('/');
   };
+  if (loading) return <CustomSpinner />;
   return (
     <AuthCommonLayout>
       <LoginForm onChange={handleChange} onSubmit={handleSubmit} user={user} />

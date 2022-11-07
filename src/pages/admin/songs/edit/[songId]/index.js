@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { hideLoading, showLoading } from 'redux/reducers/alertSlice';
 import { setSongs } from 'redux/reducers/songsSlice';
 import { setSelectedPlaylist } from 'redux/reducers/playlistSlice';
+import CustomSpinner from 'components/Common/CustomSpinner';
 
 const fileTypes = ['MP3'];
 
@@ -29,6 +30,7 @@ const AdminEditSingleSong = ({ setForceRenderPage }) => {
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => state.auth);
   const { songs } = useSelector((state) => state.songs);
+  const { loading } = useSelector((state) => state.alerts);
 
   useEffect(() => {
     setSong(state?.song);
@@ -81,6 +83,8 @@ const AdminEditSingleSong = ({ setForceRenderPage }) => {
     setForceRenderPage((prev) => !prev);
     navigate('/admin/all-songs');
   };
+
+  if (loading) return <CustomSpinner />;
 
   return (
     <CommonLayout>

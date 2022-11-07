@@ -1,4 +1,5 @@
 import { getSongsHandler } from 'api/song';
+import CustomSpinner from 'components/Common/CustomSpinner';
 import CommonLayout from 'components/Common/layout';
 import Player from 'components/player-components/Player';
 import Playlists from 'components/playlist/Playlists';
@@ -12,6 +13,7 @@ const HomePage = ({ forceRenderPage }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const { auth } = useSelector((state) => state.auth);
   const { songs, selectedMusic } = useSelector((state) => state.songs);
+  const { loading } = useSelector((state) => state.alerts);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,6 +35,8 @@ const HomePage = ({ forceRenderPage }) => {
     localStorage.setItem('songs', JSON.stringify(data?.songs));
     dispatch(setSongs(data?.songs));
   };
+
+  if (loading) return <CustomSpinner />;
   return (
     <CommonLayout>
       <div className="flex p-2 gap-5">

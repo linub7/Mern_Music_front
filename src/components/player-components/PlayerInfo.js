@@ -2,7 +2,7 @@ const PlayerInfo = ({ songTitle, artist, album, year }) => {
   return (
     <div className="flex gap-3">
       <img
-        src="https://www.pngimages.pics/images/quotes/english/general/music-symbol-png-clipart-52650-297684.png"
+        src="https://www.seekpng.com/png/detail/2-24034_colourful-music-notes-music-png.png"
         alt="music-symbol"
         className="w-12 h-12 object-cover "
       />

@@ -18,13 +18,10 @@ import AdminEditSingleSong from 'pages/admin/songs/edit/[songId]';
 
 function App() {
   const [forceRenderPage, setForceRenderPage] = useState(false);
-  const { loading } = useSelector((state) => state.alerts);
 
   useEffect(() => {}, [forceRenderPage]);
-
   return (
     <>
-      {loading && <CustomSpinner />}
       <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route element={<NotLoggedInRoutes />}>
